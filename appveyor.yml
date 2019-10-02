@@ -1,0 +1,41 @@
+version: 1.0.{build}
+
+skip_tags: true
+test: off
+max_jobs: 1
+
+cache:
+  - C:\projects\i686-8.1.0-release-posix-dwarf-rt_v6-rev0
+
+install:
+  - cmd: SET APPVEYOR_SAVE_CACHE_ON_ERROR=true
+  - cmd: SET MINGWVER=i686-8.1.0-release-posix-dwarf-rt_v6-rev0
+  - cmd: IF NOT EXIST C:\projects\%MINGVER% curl -kLO dejbug.de/pub/%MINGVER%.7z
+  - cmd: IF EXIST %MINGVER%.7z 7z x -oC:\projects\%MINGVER% %MINGVER%.7z
+  - cmd: SET PATH=C:\projects\%MINGVER%\mingw32\bin;%PATH%
+
+before_build:
+  - cmd: VER
+  - cmd: mingw32-make --version | head -1
+  - cmd: g++ --version | head -1
+  - cmd: 7z --help | head -2
+
+build_script:
+  - cmd: mingw32-make -j1 --keep-going
+
+after_build:
+  - cmd: IF NOT EXIST deploy MKDIR deploy
+  - cmd: cd deploy
+  - cmd: COPY ..\README.md .
+  - cmd: COPY ..\LICENSE .
+  - cmd: COPY ..\cathy.exe .
+  - cmd: 7z a ..\$(appveyor_project_name)-$(appveyor_build_version).7z .
+
+artifacts:
+  - path: $(appveyor_project_name)-$(appveyor_build_version).7z
+
+deploy:
+  - provider: Environment
+    name: GH
+    on:
+      branch: master

@@ -1,0 +1,9 @@
+#include <windows.h>
+#include "resource.h"
+
+IDI_ICON1 ICON DISCARDABLE "blackEye.ico"
+
+IDR_ACCELERATOR1 ACCELERATORS DISCARDABLE 
+BEGIN
+    VK_F4, 1234, VIRTKEY, NOINVERT
+END
