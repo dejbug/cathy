@@ -9,7 +9,7 @@ cache:
 
 install:
   - cmd: SET APPVEYOR_SAVE_CACHE_ON_ERROR=true
-  - cmd: SET MINGWVER=i686-8.1.0-release-posix-dwarf-rt_v6-rev0
+  - cmd: SET MINGVER=i686-8.1.0-release-posix-dwarf-rt_v6-rev0
   - cmd: IF NOT EXIST C:\projects\%MINGVER% curl -kLO dejbug.de/pub/%MINGVER%.7z
   - cmd: IF EXIST %MINGVER%.7z 7z x -oC:\projects\%MINGVER% %MINGVER%.7z
   - cmd: SET PATH=C:\projects\%MINGVER%\mingw32\bin;%PATH%
