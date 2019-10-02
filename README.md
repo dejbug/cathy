@@ -1,3 +1,5 @@
+# ([`cathy`](https://github.com/dejbug/cathy)) [![Build status](https://ci.appveyor.com/api/projects/status/nyjfgimuahfgcvb1?svg=true)](https://ci.appveyor.com/project/dejbug/cathy)
+
 # cathy
 
 Chess tactics trainer REVIVAL. A native version of the offline Chess Tactics Server.

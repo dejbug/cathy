@@ -1,4 +1,4 @@
-version: 1.0.{build}
+version: {build}
 
 skip_tags: true
 test: off
@@ -29,10 +29,10 @@ after_build:
   - cmd: COPY ..\README.md .
   - cmd: COPY ..\LICENSE .
   - cmd: COPY ..\cathy.exe .
-  - cmd: 7z a ..\$(appveyor_project_name)-$(appveyor_build_version).7z .
+  - cmd: 7z a ..\%APPVEYOR_PROJECT_NAME%-%APPVEYOR_BUILD_NUMBER%.7z .
 
 artifacts:
-  - path: $(appveyor_project_name)-$(appveyor_build_version).7z
+  - path: %APPVEYOR_PROJECT_NAME%-%APPVEYOR_BUILD_NUMBER%.7z
 
 deploy:
   - provider: Environment
